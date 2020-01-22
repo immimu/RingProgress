@@ -3,7 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/RingProgress.iml" filepath="$PROJECT_DIR$/RingProgress.iml" />
+      <module fileurl="file://$PROJECT_DIR$/RingProgress.iml" filepath="$PROJECT_DIR$/RingProgress.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ringprogresslibrary/ringprogresslibrary.iml" filepath="$PROJECT_DIR$/ringprogresslibrary/ringprogresslibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/ringprogresslibrary/ringprogresslibrary.iml" filepath="$PROJECT_DIR$/ringprogresslibrary/ringprogresslibrary.iml" />
     </modules>
   </component>

@@ -4,18 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.SeekBar;
 import android.widget.Toast;
-
-import com.ldoublem.ringPregressLibrary.OnSelectRing;
+import androidx.appcompat.app.AppCompatActivity;
 import com.ldoublem.ringPregressLibrary.Ring;
 import com.ldoublem.ringPregressLibrary.RingProgress;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -32,20 +26,32 @@ public class Test2Activity extends AppCompatActivity {
     Random random = new Random();
     List<Ring> mlistRing = new ArrayList<>();
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
-        setContentView(R.layout.layout_test2);
-        getSupportActionBar().hide();
+    private Handler mHandle = new Handler() {
 
-        mRingProgress = (RingProgress) findViewById(R.id.lv_ringp);
-        mRingProgress.setDrawBg(false);
-        setData(maxTime, maxTime + "'", "Countdown", Color.rgb(86, 171, 228), Color.argb(100, 86, 171, 228));
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+            //            mLVRingProgress.setProgress(msg.arg1);
+            if (msg.what == 0) {
+                int p = maxTime - msg.arg1;
 
-
-    }
+                if (p > 60) {
+                    setData(p, p + "'", "Countdown", Color.rgb(86, 171, 228),
+                        Color.argb(100, 86, 171, 228));
+                } else if (p > 30) {
+                    setData(p, p + "'", "Countdown", Color.rgb(17, 205, 110),
+                        Color.argb(100, 17, 205, 110));
+                } else {
+                    setData(p, p + "'", "Countdown", Color.rgb(235, 79, 56),
+                        Color.argb(100, 235, 79, 56));
+                }
+            } else {
+                Toast.makeText(Test2Activity.this, "ok", Toast.LENGTH_SHORT).show();
+                setData(maxTime, maxTime + "'", "Countdown", Color.rgb(86, 171, 228),
+                    Color.argb(100, 86, 171, 228));
+            }
+        }
+    };
 
 
     private void setData(int progress, String value, String title, int startColor,
@@ -108,44 +114,29 @@ public class Test2Activity extends AppCompatActivity {
         timerTaskLVRingProgress();
     }
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
+        setContentView(R.layout.layout_test2);
+        getSupportActionBar().hide();
+
+        mRingProgress = findViewById(R.id.lv_ringp);
+        mRingProgress.setDrawBg(false);
+        setData(maxTime, maxTime + "'", "Countdown", Color.rgb(86, 171, 228),
+            Color.argb(100, 86, 171, 228));
+    }
+
     private void stopProgressAnim() {
         if (mTimerLVRingProgress != null) {
             mTimerLVRingProgress.cancel();
-            int p = maxTime - (int) (mValueLVRingProgress);
+            int p = maxTime - mValueLVRingProgress;
             setData(p, p + "'", "Pause", Color.rgb(234, 128, 16), Color.argb(100, 234, 128, 16));
 
 
         }
     }
-
-
-    private Handler mHandle = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-//            mLVRingProgress.setProgress(msg.arg1);
-            if (msg.what == 0) {
-                int p = maxTime - (int) (msg.arg1);
-
-
-                if (p > 60) {
-                    setData(p, p + "'", "Countdown", Color.rgb(86, 171, 228), Color.argb(100, 86, 171, 228));
-
-                } else if (p > 30) {
-                    setData(p, p + "'", "Countdown", Color.rgb(17, 205, 110), Color.argb(100, 17, 205, 110));
-
-                } else {
-                    setData(p, p + "'", "Countdown", Color.rgb(235, 79, 56), Color.argb(100, 235, 79, 56));
-
-                }
-            } else {
-                Toast.makeText(Test2Activity.this, "ok", Toast.LENGTH_SHORT).show();
-                setData(maxTime, maxTime + "'", "Countdown", Color.rgb(86, 171, 228), Color.argb(100, 86, 171, 228));
-
-            }
-        }
-    };
 
     @Override
     protected void onDestroy() {

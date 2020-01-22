@@ -3,21 +3,16 @@ package com.ldoublem.ringProgress;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 import android.widget.Toast;
-
-
+import androidx.appcompat.app.AppCompatActivity;
 import com.ldoublem.ringPregressLibrary.OnSelectRing;
 import com.ldoublem.ringPregressLibrary.Ring;
 import com.ldoublem.ringPregressLibrary.RingProgress;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -47,19 +42,19 @@ public class TestActivity extends AppCompatActivity {
 
         getSupportActionBar().hide();
 
-        mRingProgress = (RingProgress) findViewById(R.id.lv_ringp);
+        mRingProgress = findViewById(R.id.lv_ringp);
         mRingProgress.setOnSelectRing(new OnSelectRing() {
             @Override
             public void Selected(Ring r) {
                 Toast.makeText(TestActivity.this, r.getName(), Toast.LENGTH_SHORT).show();
             }
         });
-        mSeekBar = (SeekBar) findViewById(R.id.sb_with);
-        mSeekBar2 = (SeekBar) findViewById(R.id.sb_rotate);
-        mSeekBar3 = (SeekBar) findViewById(R.id.sb_sweepAngle);
-        mCheckBox = (CheckBox) findViewById(R.id.cb_background);
-        mCheckBox2 = (CheckBox) findViewById(R.id.cb_corner);
-        mCheckBox3 = (CheckBox) findViewById(R.id.cb_shadow);
+        mSeekBar = findViewById(R.id.sb_with);
+        mSeekBar2 = findViewById(R.id.sb_rotate);
+        mSeekBar3 = findViewById(R.id.sb_sweepAngle);
+        mCheckBox = findViewById(R.id.cb_background);
+        mCheckBox2 = findViewById(R.id.cb_corner);
+        mCheckBox3 = findViewById(R.id.cb_shadow);
         setData();
         mSeekBar.setProgress((int) (mRingProgress.getRingWidthScale() * 100));
         mSeekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
