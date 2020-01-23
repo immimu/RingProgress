@@ -41,6 +41,9 @@ a circle progress bar with effect
 
 ```
 
+## Install
+```implementation 'com.github.immimu:RingProgress:1.0.0'```
+
 ## About me
 
 An android developer in Hangzhou.
